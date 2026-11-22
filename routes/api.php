@@ -8,4 +8,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('media', MediaController::class);
+Route::apiResource('media', MediaController::class)->parameters([
+    'media' => 'media',
+]);

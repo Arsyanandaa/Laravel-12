@@ -29,7 +29,7 @@ class MediaController extends Controller
      */
     public function show(Media $media)
     {
-        //
+        return response()->json($media);
     }
 
     /**
