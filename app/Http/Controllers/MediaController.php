@@ -21,7 +21,9 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $media = Media::create($request->only(['title', 'type', 'genre']));
+
+        return response()->json($media, 201);
     }
 
     /**
