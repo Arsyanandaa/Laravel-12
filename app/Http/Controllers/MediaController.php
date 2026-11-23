@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMediaRequest;
 use App\Models\Media;
 use Illuminate\Http\Request;
 
@@ -19,9 +20,9 @@ class MediaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMediaRequest $request)
     {
-        $media = Media::create($request->only(['title', 'type', 'genre']));
+        $media = Media::create($request->validated());
 
         return response()->json($media, 201);
     }
