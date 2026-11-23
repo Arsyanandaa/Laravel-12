@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMediaRequest;
+use App\Http\Requests\UpdateMediaRequest;
 use App\Models\Media;
 use Illuminate\Http\Request;
 
@@ -38,9 +39,9 @@ class MediaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Media $media)
+    public function update(UpdateMediaRequest $request, Media $media)
     {
-        $media->update($request->only(['title', 'type', 'genre']));
+        $media->update($request->validated());
     }
 
     /**
