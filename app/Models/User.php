@@ -31,6 +31,6 @@ class User extends Authenticatable
         ];
     }
     public function media(): BelongsToMany{
-        return $this->belongsToMany(Media::class);
+        return $this->belongsToMany(Media::class)->withTimestamps();
     }
 }

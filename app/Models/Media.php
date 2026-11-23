@@ -10,6 +10,6 @@ class Media extends Model
     protected $fillable = ['title', 'type', 'genre'];
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }
