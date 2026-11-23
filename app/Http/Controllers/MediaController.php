@@ -6,6 +6,7 @@ use App\Http\Requests\StoreMediaRequest;
 use App\Http\Requests\UpdateMediaRequest;
 use App\Models\Media;
 use Illuminate\Http\Request;
+use App\Http\Resources\MediaResource;
 
 
 class MediaController extends Controller
@@ -15,7 +16,7 @@ class MediaController extends Controller
      */
     public function index()
     {
-        return response()->json(Media::all());
+        return MediaResource::collection(Media::with('users')->get());
     }
 
     /**
@@ -25,7 +26,7 @@ class MediaController extends Controller
     {
         $media = Media::create($request->validated());
 
-        return response()->json($media, 201);
+        return (new MediaResource($media))->response()->setStatusCode(201);
     }
 
     /**
@@ -33,7 +34,7 @@ class MediaController extends Controller
      */
     public function show(Media $media)
     {
-        return response()->json($media);
+        return new MediaResource($media->load('users'));
     }
 
     /**
@@ -42,6 +43,7 @@ class MediaController extends Controller
     public function update(UpdateMediaRequest $request, Media $media)
     {
         $media->update($request->validated());
+        return new MediaResource($media);
     }
 
     /**
