@@ -39,7 +39,7 @@ class MediaController extends Controller
      */
     public function update(Request $request, Media $media)
     {
-        //
+        $media->update($request->only(['title', 'type', 'genre']));
     }
 
     /**
@@ -47,6 +47,8 @@ class MediaController extends Controller
      */
     public function destroy(Media $media)
     {
-        //
+        $media->delete();
+
+        return response()->json(null, 204);
     }
 }
